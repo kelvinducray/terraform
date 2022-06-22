@@ -1,8 +1,11 @@
 provider "aws" {
-  # profile = "default"
-  region = "ap-southeast-2"
+  region = var.aws_region
 }
 
-module "dev-environment" {
-  source = "./modules/dev"
+module "vpc-module" {
+  source      = "./modules/vpc"
+  aws_region  = var.aws_region
+  environment = var.environment
+  production  = var.production
+  ssh_ip      = var.ssh_ip
 }
