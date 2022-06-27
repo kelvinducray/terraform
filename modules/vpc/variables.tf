@@ -4,6 +4,12 @@ variable "vpc_cidr" {
   default     = "192.168.0.0/16"
 }
 
+variable "subnet_availability_zones" {
+  description = "A map of Availability zones that should be used for public & private subnets."
+  type        = list(string)
+  default     = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
+}
+
 variable "public_subnets_cidrs" {
   description = "Total hosts: 24,570"
   # Subnet 1: 192.168.0.1 - 192.168.31.254 (8,190 hosts)
@@ -24,13 +30,7 @@ variable "private_subnets_cidrs" {
   default = ["192.168.96.0/19", "192.168.128.0/19", "192.168.160.0/19"]
 }
 
-variable "az_suffixes" {
-  description = "A list of the availability zones for use in iterative resource creation."
-  type        = list(string)
-  default     = ["a", "b", "c"]
-}
-
-# Variables to be parse from the root module:
+# Variables to be parsed from the root module:
 variable "aws_region" {
   type = string
 }
